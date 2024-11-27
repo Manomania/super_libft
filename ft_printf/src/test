@@ -1,0 +1,129 @@
+#################################################################################
+#                                   VARIABLES                                   #
+#################################################################################
+
+NAME 				= 	libft.a
+CC 					= 	gcc
+CFLAGS 				= 	-Wall -Wextra -Werror
+AR					=	ar rcs
+RM					=	rm -f
+
+# Fichiers source
+LIBFT_FILES			=	ft_atoi \
+						ft_bzero \
+						ft_calloc \
+						ft_isalnum \
+						ft_isalpha \
+						ft_isascii \
+						ft_isdigit \
+						ft_isprint \
+						ft_itoa \
+						ft_lstadd_back \
+						ft_lstadd_front \
+						ft_lstclear \
+						ft_lstdelone \
+						ft_lstiter \
+						ft_lstlast \
+						ft_lstmap \
+						ft_lstnew \
+						ft_lstsize \
+						ft_memchr \
+						ft_memcmp \
+						ft_memcpy \
+						ft_memmove \
+						ft_memset \
+						ft_putchar_fd \
+						ft_putendl_fd \
+						ft_putnbr_fd \
+						ft_putstr_fd \
+						ft_split \
+						ft_strchr \
+						ft_strdup \
+						ft_striteri \
+						ft_strjoin \
+						ft_strlcat \
+						ft_strlcpy \
+						ft_strlen \
+						ft_strmapi \
+						ft_strncmp \
+						ft_strnstr \
+						ft_strrchr \
+						ft_strtrim \
+						ft_substr \
+						ft_tolower \
+						ft_toupper
+
+FT_PRINTF_FILES		=	ft_printf \
+						parsing \
+						print_adress \
+						print_char \
+						print_hexa \
+						print_int
+
+GNL_FILES			=	get_next_line \
+						get_next_line_utils
+
+# Répertoires
+LIBFT_DIR			=	src/
+FT_PRINTF_DIR		=	ft_printf/src/
+GNL_DIR				=	get_next_line/src/
+
+# Fichiers sources complets
+SRC_FILES 			=	$(addprefix $(LIBFT_DIR), $(LIBFT_FILES)) \
+						$(addprefix $(FT_PRINTF_DIR), $(FT_PRINTF_FILES)) \
+						$(addprefix $(GNL_DIR), $(GNL_FILES))
+
+SRC					=	$(addsuffix .c, $(SRC_FILES))
+OBJ 				= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
+
+# Headers
+HEADERS				=	include/libft.h \
+						ft_printf/include/ft_printf.h \
+						get_next_line/include/get_next_line.h
+
+#################################################################################
+#                                   DIRECTORY                                   #
+#################################################################################
+
+OBJ_DIR				=	obj/
+INC_DIR				=	include/
+
+#################################################################################
+#                                   COMMANDS                                    #
+#################################################################################
+
+all: $(NAME)
+
+$(NAME): $(OBJ)
+	$(AR) $@ $^
+
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
+	@echo "$(COL_GREEN)Creating directory 'obj'$(END_COL)"
+
+$(OBJ_DIR)%.o: %.c $(HEADERS) | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -I$(INC_DIR) -Ift_printf/include -Iget_next_line/include -c $< -o $@
+
+#################################################################################
+#                                     RULES                                     #
+#################################################################################
+
+clean:
+	@rm -rf $(OBJ_DIR)
+	@echo "$(COL_RED)Deleting directory 'obj'$(END_COL)"
+
+fclean: clean
+	@$(RM) $(NAME)
+	@echo "$(COL_RED)Deleting $(NAME)$(END_COL)"
+
+re: fclean all
+
+.PHONY: all clean fclean re
+
+#################################################################################
+#                                    COLOURS                                    #
+#################################################################################
+
+COL_GREEN		=	\033[0;32m
+COL_RED			=	\033[0;31m
+END_COL			=	\033[0m
