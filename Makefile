@@ -89,8 +89,6 @@ FT_PRINTF_INC		=	$(FT_PRINTF_DIR)$(INC_DIR)
 #                                                       COMMANDS                                                       #
 ########################################################################################################################
 
-
-
 all:					$(NAME)
 							@echo "$(COL_GREEN)Nothing to be done for 'all'.$(END_COL)"; \
 
