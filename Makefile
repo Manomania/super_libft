@@ -59,9 +59,9 @@ FT_PRINTF_FILES		=	ft_printf \
 GNL_FILES			=	get_next_line \
 						get_next_line_utils
 
-LIBFT_SRC 			=	$(addprefix $(SRC_DIR), $(LIBFT_FILES))
-FT_PRINTF_SRC		=	$(addprefix $(FT_PRINTF_DIR)$(SRC_DIR), $(FT_PRINTF_FILES))
-GNL_SRC 			=	$(addprefix $(GNL_DIR)$(SRC_DIR), $(GNL_FILES))
+LIBFT_SRC 			=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(LIBFT_FILES)))
+FT_PRINTF_SRC		=	$(addprefix $(FT_PRINTF_DIR)$(SRC_DIR), $(addsuffix .c, $(FT_PRINTF_FILES)))
+GNL_SRC 			=	$(addprefix $(GNL_DIR)$(SRC_DIR), $(addsuffix .c, $(GNL_FILES)))
 
 OBJ 				= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(LIBFT_FILES) $(FT_PRINTF_FILES) $(GNL_FILES)))
 
